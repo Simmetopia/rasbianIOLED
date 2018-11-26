@@ -1,8 +1,10 @@
-import onoff from "onoff";
+import { Gpio } from "onoff";
+
+const gpio = require("onoff").Gpio;
 
 console.log(1);
 var blinkInterval = setInterval(blinkLED, 250); //run the blinkLED function every 250ms
-const LED = new onoff.Gpio(4, "out");
+const LED: Gpio = new gpio(4, "out");
 function blinkLED() {
   //function to start blinking
   if (LED.readSync() === 0) {
