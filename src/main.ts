@@ -1,12 +1,13 @@
-import { Gpio } from "onoff";
+import { LedArray } from "./LedArray";
 
 const gpio = require("onoff").Gpio;
 
-(new gpio(5, "out") as Gpio).writeSync(1);
-(new gpio(6, "out") as Gpio).writeSync(1);
-(new gpio(13, "out") as Gpio).writeSync(1);
-(new gpio(19, "out") as Gpio).writeSync(1);
-(new gpio(26, "out") as Gpio).writeSync(1);
-(new gpio(12, "out") as Gpio).writeSync(1);
-(new gpio(20, "out") as Gpio).writeSync(1);
-(new gpio(21, "out") as Gpio).writeSync(1);
+const Reds = new LedArray([26, 19, 13]);
+const Greens = new LedArray([5, 6, 12]);
+const Yellows = new LedArray([16, 20, 21]);
+
+[Reds, Greens, Yellows].forEach(ledArray => {
+  ledArray.GpioArray.forEach(led => {
+    led.Gpio = 1;
+  });
+});
