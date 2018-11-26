@@ -7,7 +7,7 @@
     "start": "rimraf build && rollup -cw & nodemon build/bundle.js",
     "compile:server": "tsc -p src/server",
     "watch": "rollup -cw",
-    "lint": "tslint --project tsconfig.json --type-check",
+    "lint": "tslint --project tsconfig.json --type-check"
   },
   "devDependencies": {
     "@types/node": "^10.9.3",
