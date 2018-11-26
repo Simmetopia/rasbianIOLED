@@ -4,7 +4,7 @@
   "main": "index.ts",
   "license": "MIT",
   "scripts": {
-    "start": "rimraf build && rollup -c & node build/bundle.js",
+    "start": "rimraf build && rollup -c && node build/bundle.js",
     "compile:server": "tsc -p src/server",
     "watch": "rollup -cw",
     "lint": "tslint --project tsconfig.json --type-check"
