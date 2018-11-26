@@ -1,0 +1,36 @@
+{
+  "name": "rollup",
+  "version": "0.0.1",
+  "main": "index.ts",
+  "license": "MIT",
+  "scripts": {
+    "start": "rimraf build && node build/bundle.js",
+    "compile:server": "tsc -p src/server",
+    "watch": "rollup -cw",
+    "lint": "tslint --project tsconfig.json --type-check",
+    "postinstall": "yarn build"
+  },
+  "devDependencies": {
+    "@types/node": "^10.9.3",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.67.3",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-livereload": "^0.6.0",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-replace": "^2.1.0",
+    "rollup-plugin-serve": "^0.6.0",
+    "rollup-plugin-typescript2": "github:ezolenko/rollup-plugin-typescript2#master",
+    "rollup-plugin-uglify": "^6.0.0",
+    "rollup-watch": "^4.3.1",
+    "ts-node-dev": "^1.0.0-pre.30",
+    "tslib": "^1.9.3",
+    "tslint": "^5.11.0",
+    "typescript": "^3.1.6"
+  },
+  "dependencies": {
+    "@types/onoff": "^3.2.1",
+    "@types/shelljs": "^0.8.0",
+    "shelljs": "^0.8.2",
+    "ts-node": "^7.0.1"
+  }
+}
