@@ -9,10 +9,7 @@ const plugins = [
   // nodeResolve makes rollup look for dependencies in the node_modules directory
   globals(),
   builins(),
-  nodeResolve({
-    jsnext: true,
-    main: true
-  }),
+  nodeResolve(),
   commonjs({
     // All of our own sources will be ES6 modules, so only node_modules need to be resolved with cjs
     include: "node_modules/**",
@@ -28,9 +25,10 @@ const plugins = [
   })
 ];
 
+plugins.push(uglify());
+
 export default {
   input: "./src/main.ts",
-  sourceMap: false,
   output: {
     file: "./build/bundle.js",
     format: "iife",
