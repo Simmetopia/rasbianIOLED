@@ -36,4 +36,4 @@ setInterval(() => {
     turnOn();
   }
   flag = !flag;
-}, 1000);
+}, 250);
