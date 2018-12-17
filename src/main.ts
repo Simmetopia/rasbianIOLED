@@ -26,6 +26,7 @@ const turnOff = () => {
     });
   });
 };
+process.on("exit", turnOff);
 
 setInterval(() => {
   if (flag) {
