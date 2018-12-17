@@ -27,11 +27,7 @@ const turnOff = () => {
   });
 };
 
-process.on("exit", turnOff);
-process.on("SIGINT", turnOff);
-process.on("uncaughtException", turnOff);
-
-setInterval(() => {
+const intervalInterrupt = setInterval(() => {
   if (flag) {
     turnOff();
   }
@@ -40,3 +36,19 @@ setInterval(() => {
   }
   flag = !flag;
 }, 250);
+
+process.on("exit", () => {
+  console.log("Shuts down gracefully");
+  turnOff();
+  clearInterval(intervalInterrupt);
+});
+process.on("SIGINT", () => {
+  console.log("Shuts down gracefully");
+  turnOff();
+  clearInterval(intervalInterrupt);
+});
+process.on("uncaughtException", () => {
+  console.log("Shuts down gracefully");
+  turnOff();
+  clearInterval(intervalInterrupt);
+});
