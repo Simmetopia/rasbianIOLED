@@ -8,11 +8,13 @@ const Greens = new LedArray([5, 6, 12]);
 const Yellows = new LedArray([16, 20, 21]);
 
 let flag = false;
+let compareFlag = false;
 
 const turnOn = () => {
   [Reds, Greens, Yellows].forEach(ledArray => {
     ledArray.GpioArray.forEach(led => {
-      led.Gpio = 1;
+      led.Gpio = flag === compareFlag ? 1 : 0;
+      compareFlag = !compareFlag;
     });
   });
 };
