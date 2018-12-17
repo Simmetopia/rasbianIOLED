@@ -26,7 +26,10 @@ const turnOff = () => {
     });
   });
 };
+
 process.on("exit", turnOff);
+process.on("SIGINT", turnOff);
+process.on("uncaughtException", turnOff);
 
 setInterval(() => {
   if (flag) {
