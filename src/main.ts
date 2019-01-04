@@ -1,30 +1,33 @@
 import { LedArray } from "./LedArray";
-import { on } from "cluster";
 
 const gpio = require("onoff").Gpio;
 
-const Reds = new LedArray([26, 19, 13]);
-const Greens = new LedArray([5, 6, 12]);
-const Yellows = new LedArray([16, 20, 21]);
+const Mode1 = new gpio(17,"in","both");
+
+Mode1.watch((err:any,val:any)=>{
+	if(err) console.log("there has been an error",err);
+	if(val === 1) turnOn();
+	else turnOff();
+});
+
+const OptionLeds = new LedArray([26, 19, 13]);
 
 let flag = false;
 let compareFlag = false;
 
+
 const turnOn = () => {
-  [Reds, Greens, Yellows].forEach(ledArray => {
-    ledArray.GpioArray.forEach(led => {
+    OptionLeds.GpioArray.forEach(led => {
       led.Gpio = flag === compareFlag ? 1 : 0;
       compareFlag = !compareFlag;
     });
-  });
 };
 
 const turnOff = () => {
-  [Reds, Greens, Yellows].forEach(ledArray => {
-    ledArray.GpioArray.forEach(led => {
-      led.Gpio = 0;
+  OptionLeds.GpioArray.forEach(led => {
+      led.Gpio = flag === compareFlag ? 1 : 0;
+      compareFlag = !compareFlag;
     });
-  });
 };
 
 const intervalInterrupt = setInterval(() => {
