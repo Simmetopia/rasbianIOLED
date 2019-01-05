@@ -8,19 +8,29 @@ const Sw2 = new SwitchControl(19);
 const handle = () => {
   let status1 = Sw1.State;
   let status2 = Sw2.State;
-  console.log([status1,status2]);
-  switch ([status1, status2]) {
-    case [1, 0]: {
-      OptionLeds.GpioArray[0].Gpio = 1;
+  console.log([status1, status2]);
+  OptionLeds.GpioArray.forEach(gp => {
+    gp.Gpio = 0;
+  });
+
+  switch (status1) {
+    case 1: {
+      if (status2 == 1) {
+        OptionLeds.GpioArray.forEach(led => (led.Gpio = 1));
+      } else {
+        OptionLeds.GpioArray[0].Gpio = 1;
+      }
       break;
     }
-    case [0, 1]: {
-      OptionLeds.GpioArray[0].Gpio = 1;
-      OptionLeds.GpioArray[1].Gpio = 1;
-      break;
-    }
-    case [1, 1]: {
-      OptionLeds.GpioArray.forEach(led => (led.Gpio = 1));
+    case 0: {
+      if (status2 === 1) {
+        OptionLeds.GpioArray[0].Gpio = 1;
+        OptionLeds.GpioArray[1].Gpio = 1;
+      } else {
+        OptionLeds.GpioArray.forEach(gp => {
+          gp.Gpio = 0;
+        });
+      }
       break;
     }
     default: {
