@@ -10,6 +10,7 @@ const handle = () => {
   switch (status1) {
     case 1: {
       OptionLeds.GpioArray[0].Gpio = 1;
+      break;
     }
     default: {
       OptionLeds.GpioArray.forEach(gp => {
