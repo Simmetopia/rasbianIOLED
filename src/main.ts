@@ -1,7 +1,6 @@
 import {LedArray} from './LedArray';
 import {SwitchControl} from './SwitchControl';
 
-const gpio = require('onoff').Gpio;
 
 const OptionLeds = new LedArray([21, 20, 16]);
 const Sw1 = new SwitchControl(17);

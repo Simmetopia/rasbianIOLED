@@ -1,12 +1,12 @@
 import {Gpio} from 'onoff';
 
-const Gpio = require('onoff').GPIO;
+const GPIO = require('onoff').Gpio;
 export class SwitchControl {
   private _flipFlotState = 0;
   private _gpioPin: Gpio;
 
   constructor(gpioPin: number) {
-    this._gpioPin = new Gpio(gpioPin, 'in', 'rising', {debounceTimeout: 10});
+    this._gpioPin = new GPIO(gpioPin, 'in', 'rising', {debounceTimeout: 10});
   }
 
   public startWatching = (cb: () => void) => {
