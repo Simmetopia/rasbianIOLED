@@ -5,6 +5,7 @@ const OptionLeds = new LedArray([21, 20, 16]);
 
 const Sw1 = new SwitchControl(17);
 const Sw2 = new SwitchControl(19);
+
 const handle = () => {
   let status1 = Sw1.State;
   let status2 = Sw2.State;
@@ -40,6 +41,7 @@ const handle = () => {
     }
   }
 };
+
 console.log('now staring to listen');
 
 Sw1.startWatching(handle);
