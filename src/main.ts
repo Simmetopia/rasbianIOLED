@@ -24,8 +24,9 @@ Sw1.startWatching(handle);
 
 const freeResources = () => {
   console.log('handle stuff here');
+  OptionLeds.GpioArray.forEach((led)=>led.Gpio = 0);
 };
-process.on('exit', () => {
+process.on('SIGINT', () => {
   console.log('Shuts down gracefully');
   freeResources();
 });

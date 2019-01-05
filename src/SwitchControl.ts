@@ -8,6 +8,10 @@ export class SwitchControl {
   constructor(gpioPin: number) {
     this._gpioPin = new GPIO(gpioPin, 'in', 'rising', {debounceTimeout: 10});
   }
+  public freeResources() {
+    this._gpioPin.unwatch();
+    this._gpioPin.unexport();
+  }
 
   public startWatching = (cb: () => void) => {
     this._gpioPin.watch((err, value) => {

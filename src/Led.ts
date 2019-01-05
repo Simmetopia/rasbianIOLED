@@ -11,4 +11,8 @@ export class Led {
   public set Gpio(val: 0 | 1) {
     this._gpio.writeSync(val);
   }
+  public freeResources() {
+    this._gpio.writeSync(0);
+    this._gpio.unexport();
+  }
 }
