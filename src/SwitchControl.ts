@@ -14,6 +14,7 @@ export class SwitchControl {
       console.log('event!!!');
       if (err) console.log(err);
       this._flipFlotState = value === 1 ? 1 : 0;
+      cb();
     });
   };
 
