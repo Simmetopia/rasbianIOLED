@@ -1,5 +1,5 @@
 import {LedArray} from './LedArray';
-import {SwitchControl} from 'SwitchControl';
+import {SwitchControl} from './SwitchControl';
 
 const gpio = require('onoff').Gpio;
 
