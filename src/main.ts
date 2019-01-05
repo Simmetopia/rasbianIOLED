@@ -1,39 +1,37 @@
 import {LedArray} from './LedArray';
+import {SwitchControl} from '../SwitchControl';
 
 const gpio = require('onoff').Gpio;
 
-const Mode1 = new gpio(17, 'in', 'both');
-console.log('starting to watch mode with :', JSON.stringify(Mode1));
-Mode1.watch((err: any, val: any) => {
-  console.log('now watching for changes');
-  if (err) console.log('there has been an error', err);
-  if (val === 1) {
-    console.log('turning on Leds');
-    turnOn();
-  } else turnOff();
-});
+const OptionLeds = new LedArray([21, 20, 16]);
+const Sw1 = new SwitchControl(17);
 
-const OptionLeds = new LedArray([26, 19, 16]);
+const handle = () => {
+  let status1 = Sw1.State;
 
-
-const turnOn = () => {
-  OptionLeds.GpioArray.forEach(led => {
-    led.Gpio = 1;
-  });
+  switch (status1) {
+    case 1: {
+      OptionLeds.GpioArray[0].Gpio = 1;
+    }
+    default: {
+      OptionLeds.GpioArray.forEach(gp => {
+        gp.Gpio = 0;
+      });
+    }
+  }
 };
+console.log('now staring to listen');
+Sw1.startWatching(handle);
 
-const turnOff = () => {
-  OptionLeds.GpioArray.forEach(led => {
-    led.Gpio = 0;
-  });
+const freeResources = () => {
+  console.log('handle stuff here');
 };
-
 process.on('exit', () => {
   console.log('Shuts down gracefully');
-  turnOff();
+  freeResources();
 });
 
 process.on('uncaughtException', () => {
   console.log('Shuts down gracefully');
-  turnOff();
+  freeResources();
 });

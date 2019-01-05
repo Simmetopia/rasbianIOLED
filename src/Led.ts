@@ -1,4 +1,4 @@
-import { Gpio } from "onoff";
+import {Gpio} from 'onoff';
 
 export class Led {
   private _gpio: Gpio;
