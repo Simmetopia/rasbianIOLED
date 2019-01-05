@@ -15,7 +15,6 @@ export class SwitchControl {
 
   public startWatching = (cb: () => void) => {
     this._gpioPin.watch((err, value) => {
-      console.log('event!!!');
       if (err) console.log(err);
       this._flipFlotState = this._flipFlotState === 0 ? 1 : 0;
       cb();
