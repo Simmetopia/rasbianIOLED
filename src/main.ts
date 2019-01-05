@@ -15,45 +15,25 @@ Mode1.watch((err: any, val: any) => {
 
 const OptionLeds = new LedArray([26, 19, 16]);
 
-let flag = false;
-let compareFlag = false;
 
 const turnOn = () => {
   OptionLeds.GpioArray.forEach(led => {
-    led.Gpio = flag === compareFlag ? 1 : 0;
-    compareFlag = !compareFlag;
+    led.Gpio = 1;
   });
 };
 
 const turnOff = () => {
   OptionLeds.GpioArray.forEach(led => {
-    led.Gpio = flag === compareFlag ? 1 : 0;
-    compareFlag = !compareFlag;
+    led.Gpio = 0;
   });
 };
-
-const intervalInterrupt = setInterval(() => {
-  if (flag) {
-    turnOff();
-  }
-  if (!flag) {
-    turnOn();
-  }
-  flag = !flag;
-}, 250);
 
 process.on('exit', () => {
   console.log('Shuts down gracefully');
   turnOff();
-  clearInterval(intervalInterrupt);
 });
-process.on('SIGINT', () => {
-  console.log('Shuts down gracefully');
-  turnOff();
-  clearInterval(intervalInterrupt);
-});
+
 process.on('uncaughtException', () => {
   console.log('Shuts down gracefully');
   turnOff();
-  clearInterval(intervalInterrupt);
 });
