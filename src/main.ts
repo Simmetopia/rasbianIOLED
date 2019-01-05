@@ -1,13 +1,14 @@
-import { LedArray } from "./LedArray";
+import {LedArray} from './LedArray';
 
-const gpio = require("onoff").Gpio;
+const gpio = require('onoff').Gpio;
 
-const Mode1 = new gpio(17,"in","both");
+const Mode1 = new gpio(17, 'in', 'both');
 
-Mode1.watch((err:any,val:any)=>{
-	if(err) console.log("there has been an error",err);
-	if(val === 1) turnOn();
-	else turnOff();
+Mode1.watch((err: any, val: any) => {
+  console.log('now watching for changes');
+  if (err) console.log('there has been an error', err);
+  if (val === 1) turnOn();
+  else turnOff();
 });
 
 const OptionLeds = new LedArray([26, 19, 13]);
@@ -15,19 +16,18 @@ const OptionLeds = new LedArray([26, 19, 13]);
 let flag = false;
 let compareFlag = false;
 
-
 const turnOn = () => {
-    OptionLeds.GpioArray.forEach(led => {
-      led.Gpio = flag === compareFlag ? 1 : 0;
-      compareFlag = !compareFlag;
-    });
+  OptionLeds.GpioArray.forEach(led => {
+    led.Gpio = flag === compareFlag ? 1 : 0;
+    compareFlag = !compareFlag;
+  });
 };
 
 const turnOff = () => {
   OptionLeds.GpioArray.forEach(led => {
-      led.Gpio = flag === compareFlag ? 1 : 0;
-      compareFlag = !compareFlag;
-    });
+    led.Gpio = flag === compareFlag ? 1 : 0;
+    compareFlag = !compareFlag;
+  });
 };
 
 const intervalInterrupt = setInterval(() => {
@@ -40,18 +40,18 @@ const intervalInterrupt = setInterval(() => {
   flag = !flag;
 }, 250);
 
-process.on("exit", () => {
-  console.log("Shuts down gracefully");
+process.on('exit', () => {
+  console.log('Shuts down gracefully');
   turnOff();
   clearInterval(intervalInterrupt);
 });
-process.on("SIGINT", () => {
-  console.log("Shuts down gracefully");
+process.on('SIGINT', () => {
+  console.log('Shuts down gracefully');
   turnOff();
   clearInterval(intervalInterrupt);
 });
-process.on("uncaughtException", () => {
-  console.log("Shuts down gracefully");
+process.on('uncaughtException', () => {
+  console.log('Shuts down gracefully');
   turnOff();
   clearInterval(intervalInterrupt);
 });
