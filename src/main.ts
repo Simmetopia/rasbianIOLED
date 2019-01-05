@@ -13,7 +13,7 @@ Mode1.watch((err: any, val: any) => {
   } else turnOff();
 });
 
-const OptionLeds = new LedArray([26, 19, 13]);
+const OptionLeds = new LedArray([26, 19, 16]);
 
 let flag = false;
 let compareFlag = false;
