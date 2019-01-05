@@ -1,13 +1,12 @@
 import {LedArray} from './LedArray';
 import {SwitchControl} from './SwitchControl';
 
-
 const OptionLeds = new LedArray([21, 20, 16]);
 const Sw1 = new SwitchControl(17);
 
 const handle = () => {
   let status1 = Sw1.State;
-
+  console.log(status1);
   switch (status1) {
     case 1: {
       OptionLeds.GpioArray[0].Gpio = 1;
